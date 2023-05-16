@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP2-Yuri Eloi Chayer</title>
+    <!--lier les feuille de style css et les icones google-->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- 
+        Réaliser par Yuri ELoi Chayer
+        Images et vidéos tirés de youtube, google et de moi
+        Avril à Mai 2023 (Remise = 18 mai 2023)
+    -->
+</head>
+<body>
+    <!--section où nous retrouvons le titre du Quiz-->
+    <header>
+        <h1>Homemade Ski Compétition - <span id="motCouleur">Quiz</span></h1>
+        <img src="images/SVG/logoCompétition.svg" alt="logo de la Compétition">
+    </header>
+    <!--element pour l'animation d'intro-->
+        <div class="interrieurCabine"></div>
+        <div id="porteGauche"></div>
+        <div id="porteDroite"></div>
+        <!--section où nous retrouvons les questions et les réponses du Quiz-->
+        <main>
+        <!--animation entre les question (flocon de neige)-->
+            <div id="animationSection"></div>
+            <div id="quiz">
+                <input type="checkbox" id="titreQuiz">
+                <label for="titreQuiz" class="sousMenu">
+                    <h1>Quiz sur les figures de ski alpin</h1>
+                </label>
+                <h1 id="boutonJouer">Jouer</h1>
+            </div>
+        <!--iamge d'Arriere plan defilant-->
+        <div class = "carouselleMontagne">
+            <img src="Images/SVG/montagneFond.svg" alt="montagne">
+            <img src="Images/SVG/montagneFond.svg" alt="montagne">
+            <img src="Images/SVG/montagneFond.svg" alt="montagne">
+            <img src="Images/SVG/montagneFond.svg" alt="montagne">
+            <img src="Images/SVG/montagneFond.svg" alt="montagne">
+            <img src="Images/SVG/montagneFond.svg" alt="montagne">
+        </div>
+    </main>
+    <!--section ou nous retrouvons les information sur la création du Quiz(qui la fait, quand, pourquoi, etc.)-->
+    <footer>
+        <p>TP2 - 2W2</p>
+        <p>Réalisé par Yuri Eloi Chayer</p>
+    </footer>
+
+    <div class="curseur"></div>
+    <!-- inserer la feuille JavaScript-->
+    <script src="js/index.js"></script>
+</body>
+</html>

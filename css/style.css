@@ -1,0 +1,730 @@
+/*lier une police d'écriture*/
+@import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');/*police pour les titres*/
+@import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');/*police pour le texte*/
+
+
+/*Remise a 0 supplémentaire*/
+*, ::after, ::before{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/*-------------------------------Mobile First (iphone XR)-------------------------------*/
+/*Varibale CSS*/
+:root{
+    --couleur-arriere-plan: rgb(30, 162, 210);/*couleur du backgrond*/
+    --couleur-texte: white;/*couleur du texte dans les réponses, description et footer*/
+    --couleur-titre: rgb(31, 13, 137);/*couleur du titre*/
+    --couleur-question: rgb(254, 80, 0);/*couleur des questions*/
+    --couleur-boite-reponse: rgb(87, 87, 251);/*couleur des boites dans lequelles il y a les reponses pour la question*/
+    --padding: 2%;/*padding egale partout dans la page*/
+    --police-titres:'Bungee', sans-serif; /*police d'écriture des titres et des questions*/
+    --police-textes:'Staatliches', sans-serif; /*police d'écriture du textes des réponses et autre*/
+    --couleur-victoire: rgb(0, 144, 0); /*couleur de la boite quand on obtient la bonne réponse*/ 
+    --coueleur-erreur: red;/*couleur de la boite quand la mauvaise reéponse est choisi*/
+    --position-x: 0px;
+    --position-y: 0px;
+}
+/*_____________conteneur généraux_____________________*/
+body{
+    background-color: var(--couleur-arriere-plan);
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    cursor: none;
+}
+
+/*titre*/
+h1{
+    font-family: var(--police-titres);
+    color: var(--couleur-titre);
+}
+
+/*texte*/
+p{
+    font-family: var(--police-textes);
+    color: var(--couleur-texte);
+}
+
+/*section du header dans laquelle les éléments sont et prennent tout le haut de la page */
+header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    padding: var(--padding);
+    border-bottom: 2px solid var(--couleur-titre);
+    height: 20%;
+    width: 100%;
+}
+
+header img{
+    width: 5rem;
+    height: 5rem;
+}
+
+#motCouleur{
+    color: var(--couleur-question);
+}
+/*animation entre section -- repreter 5 fois pour que la meme anmiation joue comme transition (donner un nouveau nom pour faire comme si une nouvelle animation joue*/
+/*animation d'un flocon de neige qui s'agrandi pour prendre toute la section*/
+@keyframes animation-ouverture-section-0{
+    from{
+        transform: scale(100%);
+    }
+
+    to{
+        transform: scale(3000%);
+    }
+}
+
+@keyframes animation-ouverture-section-1{
+    from{
+        transform: scale(100%);
+    }
+
+    to{
+        transform: scale(3000%);
+    }
+}
+
+@keyframes animation-ouverture-section-2{
+    from{
+        transform: scale(100%);
+    }
+
+    to{
+        transform: scale(3000%);
+    }
+}
+
+@keyframes animation-ouverture-section-3{
+    from{
+        transform: scale(100%);
+    }
+
+    to{
+        transform: scale(3000%);
+    }
+}
+
+@keyframes animation-ouverture-section-4{
+    from{
+        transform: scale(100%);
+    }
+
+    to{
+        transform: scale(3000%);
+    }
+}
+
+#animationSection{
+    position: absolute;
+    background-image: url(../Images/1x/flocon.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+    width: 100vw;
+    pointer-events: none;
+    z-index: 1000000;
+
+}
+
+/*section du main dans laquelle le fond est une animation en boucle de montagne qui defile comme si c'était un panorama. Dans cette section il y aurra aussi les questions et réponses du Quiz ainsi que la barre de progression qui est une skieur descendant une pente de ski. Lorsque l'utilisateur a la bonne réponse, un drapeu apparait sur le coté.*/
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--padding);
+    height: 80%;
+    width: 100%;
+}
+
+main h1{
+    color: var(--couleur-question);
+    border: 2px solid var(--couleur-question);
+    padding: 0;
+    transition: 0.5s color, 0.5s border, 0.5s padding;
+    z-index: 100;
+    position: relative;
+}
+
+main h1:hover{
+    color: var(--couleur-titre);
+    border: 2px solid var(--couleur-titre);;
+}
+
+#quiz{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.sectionQuestion{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    height: 35vh;
+    width: 100vw;
+}
+
+/*pente de ski pour indiquer les question dans le quiz*/
+.penteSki{
+    display: block;
+    background-image: url(../Images/SVG/pente.svg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
+    height: 50vh;
+    width: 10vh;
+}
+
+.skieur{
+    display: block;
+    background-image: url(../Images/SVG/skieur.svg);
+    background-repeat: no-repeat;
+    background-size: 50%;
+    background-position: center;
+    position: absolute;
+    left: 75vw;
+    height: 5vh;
+    width: 5vh;
+    transition: top 0.5s;
+}
+
+.pasVisible{
+    display: none;
+}
+
+/*animation de l'Arriere plan (montagne) */
+.carouselleMontagne{
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    animation: 10s caroussel-montagne linear infinite;
+    width: 100%;
+    z-index: -1;
+}
+
+.carouselleMontagne img{
+    height: 100%;
+    width: 100%;
+    transform: translateY(142%) scale(2);
+}
+
+@keyframes caroussel-montagne{
+    from{
+        transform: translateX(0%);
+    }
+
+    to{
+        transform: translateX(-99%);
+    }
+}
+
+/*introduction au Quiz (animation d'une cabine de ski qui souvre avec css)*/
+/*animation de zoom pour l'image d'arriere plan*/
+@keyframes sortir-cabine{
+    from{
+        transform: translateY(20%) scale(3.7);
+    }
+    to{
+        transform: translateY(20%) scale(6);
+    }
+}
+
+/*arriere plan dans l'animation*/
+.interrieurCabine{
+    pointer-events: none;
+    width: 100vw;
+    height: 100vw;
+    position: absolute;    
+    z-index: 1100;
+    background-image: url(../Images/SVG/interrieurCabinne.svg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    transform: translateY(20%) scale(3.7);
+    animation: sortir-cabine 1s 2s ease-out forwards;
+}
+
+/*animation de la porte de gauche qui se deplace vers la gauche comme si elle s'ouvrait*/
+@keyframes translation-porte-gauche{
+    from{
+        transform: translateX(-49%);
+    }
+
+    to{
+        transform: translateX(-100%);
+    }
+}
+
+/*porte de droite et gauche de la cabine*/
+#porteGauche{
+    pointer-events: none;
+    position: absolute;
+    z-index: 1110;
+    background-image: url(../Images/SVG/porteGauche.svg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    transform: translateX(-49%);
+    animation: translation-porte-gauche 1s 1s ease-out forwards;
+}
+
+/*animation de la porte de droite qui se deplace vers la droite comme si elle s'ouvrait*/
+@keyframes translation-porte-droite{
+    from{
+        transform: translateX(49%);
+    }
+
+    to{
+        transform: translateX(100%);
+    }
+}
+
+#porteDroite{
+    pointer-events: none;
+    position: absolute;
+    z-index: 1110;
+    background-image: url(../Images/SVG/porteDroite.svg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    transform: translateX(49%);
+    animation: translation-porte-droite 1s 1s ease-out forwards;
+}
+
+/*lorsquer sous titre activer faire apparaitre le boutton jouer avec un ::before pour que l'utilisateur puisse soit commencer a jouer */
+#titreQuiz{
+    display: none;
+}
+
+#titreQuiz:checked + .sousMenu h1{
+    color: var(--couleur-texte);
+    border: 2px solid var(--couleur-texte);
+    padding: var(--padding);
+}
+
+#boutonJouer{
+    display: none;
+    position: relative;
+}
+
+#boutonJouer::before{
+    content: "cliquez sur 1 des 4 choix de réponse pour essayer d'avoir le meilleur score";
+    position: absolute;
+    color: var(--couleur-question);
+    width: 70vw;
+    transform: translateY(80%);
+}
+
+#titreQuiz:checked ~ #boutonJouer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#titreQuiz:checked ~ #boutonJouer:hover{
+    color: var(--couleur-texte);
+    border: 2px solid var(--couleur-texte);
+    padding: 0.5%;
+}
+
+/*boite des question qui contient une image ou une video avec la question en h1*/
+.boiteQuestion{
+    width: 50%;
+    background-color: var(--couleur-boite-reponse);
+    border: 2px solid var(--couleur-titre);
+    border-radius: 15%;
+    color: var(--couleur-question);
+    padding: var(--padding);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    max-height: 35vh;
+}
+
+.boiteQuestion h1{
+    padding: var(--padding);
+    border: none;
+    font-size: 1.2rem;
+}
+
+.boiteQuestion img, .boiteQuestion video{
+   /* height: 20vh;*/
+    width: 90%;
+}
+
+
+/*section dans laquelle les reponses seront inserrer*/
+.conteneurReponse{
+    margin-top: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    height: 30vh;
+}
+
+/*boite de choix de réponse */
+.boiteChoix{
+    padding: var(--padding);
+    margin: var(--padding);
+    background-color: var(--couleur-boite-reponse);
+    color: var(--couleur-texte);
+    border-radius: 25%;
+    border: 2px solid var(--couleur-titre);
+    width: 70vw;
+    height: 70vh;
+    text-align: center;
+    font-size: larger;
+    font-family: var(--police-textes), sans-serif;
+    position: relative;
+    transition: transform 0.5s;
+}
+
+.boiteChoix:hover{
+    transform: scale(1.3);
+}
+
+.boiteChoix::before{
+    content: "";
+    position: absolute;
+    border: 0px solid var(--couleur-texte);
+    height: 10%;
+    width: 0%;
+    bottom: 0;
+    left: 0;
+    right: 100;
+    transition: width 0.5s, border 0.5s;
+}
+
+.boiteChoix:hover::before{
+    width: 100%;
+    border: 2px solid var(--couleur-texte);
+}
+
+/*animation quand la bonne réponse est cliquer*/
+@keyframes animation-victoire{
+    from{
+        transform: translateY(0%) rotateY(0deg);
+    }
+    50%{
+        transform: translateY(-50%) rotateY(540deg);
+    }
+    to{
+        transform: translateY(0%) rotateY(1080deg);
+    }
+}
+
+/*class quand la bonne reponse est choisie*/
+.victoire{
+    animation: animation-victoire 1s ease-in;
+    background-color: var(--couleur-victoire);
+}
+
+/*animation lorsqu'une erreur arrive*/
+@keyframes animation-erreur{
+    from{
+        transform: translateX(0%);
+    }
+    30%{
+        transform: translateX(30%);
+    }
+    60%{
+        transform: translateX(-30%);
+    }
+    to{
+        transform: translateX(0%);
+    }
+}
+/*class quand ill y a une erreur*/
+.erreur{
+    background-color: var(--coueleur-erreur);
+    animation: animation-erreur 0.5s ease-in;
+}
+
+/*animation de fin qui fait que le conteneur fin descend en se deplacent de gauche a droite */
+@keyframes animation-fin{
+    from{
+        transform: translate(-50%, -100%) scale(50%);
+    }
+    20%{
+        transform: translate(0%, -80%) scale(60%);
+    }
+    40%{
+        transform: translate(50%, -60%) scale(70%);
+    }
+    60%{
+        transform: translate(0%, -40%) scale(80%);
+    }
+    80%{
+        transform: translate(-50%, -20%) scale(90%);
+    }
+    to{
+        transform: translate(0%, 0%) scale(100%);
+    }
+}
+
+/*fin du jeu (afficher le score, le meilleur score et le bouton rejouer*/
+.fin{
+    padding: var(--padding);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    font-family: var(--police-textes);
+    color: var(--couleur-texte);
+    background-color: var(--couleur-boite-reponse);
+    border-radius: 25%;
+    height: 50vh;
+    width: 50vh;
+    border: 2px solid var(--couleur-titre);
+    margin-top: 25vh;
+    animation: animation-fin 4s ease-out;
+    position: relative;
+}
+
+.fin img{
+    z-index: 1000;
+    height: 5vh;
+    width: 5vh;
+}
+
+/*bouton pour rejoeur*/
+.rejouer::before{
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2vh;
+    border: 0px solid var(--couleur-texte);
+    transition: width 0.5s, border 0.5s;
+}
+
+.rejouer:hover::before{
+    width: 100%;
+    border: 2px solid var(--couleur-question);
+}
+
+.material-icons{
+    transform: scale(1);
+    transition: transform 0.5s;
+    padding: var(--padding);
+}
+
+.material-icons:hover{
+    transform: scale(2);
+}
+
+/*section du footer dans laquelle nous retrouvons les informations sur la réalisation de ce TP*/
+footer{
+    position: absolute;
+    bottom: 0;
+    height: 10%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--padding);
+}
+
+/*curseur personnaliser*/
+.curseur{
+    display: none;
+
+}
+
+/*-----------------------------Tablette--------------------------------------*/
+@media screen and (min-width : 768px){
+    /*image dans le carrouselle des montagne redimensionner et déplacer*/
+    .carouselleMontagne img{
+        height: 100%;
+        width: 100%;
+        transform: translateY(70%) scale(2.5);
+    }
+
+    .interrieurCabine{
+        display: none;
+    }
+
+    #porteGauche{
+        background-size: 80%;
+        transform: translateX(-40%);
+        animation: translation-porte-gauche 1s 1s ease-out forwards;
+    }
+
+    #porteDroite{
+        background-size: 80%;
+        transform: translateX(40%);
+        animation: translation-porte-droite 1s 1s ease-out forwards;
+    }
+
+    /*section ou les reponses se trouve*/
+    .conteneurReponse{
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 60vw;
+        height: 50vh;
+        margin-top: 2%;
+        margin-bottom: 2%;
+    } 
+
+    .boiteQuestion img, .boiteQuestion video{
+        height: 20vh;
+        width: 20vh;
+    }
+
+    .boiteChoix{
+        height: 15vh;
+        width: 20vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .skieur{
+        left: 82vw;
+    }
+
+    .curseur{
+        display: block;
+        background-image: url(../Images/1x/bouleNeige.png);
+        background-repeat: no-repeat;
+        background-size: 80%;
+        top: -1.2rem;
+        left: -1.2rem;
+        position: fixed;
+        width: 2.4rem;
+        height: 2.4rem;
+        transform: translate(var(--position-x), var(--position-y));
+        z-index: 10000000;
+        pointer-events: none;
+        will-change: transform;
+        transition: transform 0.5s ease-out;
+    }
+}
+/*-----------------------------Ordinateur------------------------------------*/
+@media screen and (min-width : 1080px) {
+    .carouselleMontagne img{
+        height: 100%;
+        width: 100%;
+        transform: translateY(42%) scale(2);
+    }
+
+
+    .boiteQuestion img{
+        height: 20vh;
+        width: 20vh;
+    }
+
+    .boiteQuestion video{
+        width: 90%;
+    }
+
+    /*animation de la sorti de la cabine pour l'ordinateur (pas les meme valeur que sur le telephone*/
+    @keyframes sorti-cabine-ordi{
+        from{
+            transform: translateY(-34%) scale(1);
+        }
+
+        to{
+            transform: translateY(-34%) scale(4);
+        }
+    }
+
+    .interrieurCabine{
+        transform: translateY(-30%);
+        background-size: 105%;
+        z-index: 100000;
+        animation: sorti-cabine-ordi 2s 3s ease-out forwards;
+        display: flex;
+    }
+
+    /*animation pour la porte de gauche qui se déplace vers la gauche sur l'ordinateur*/
+
+    @keyframes translation-porte-gauche-ordi{
+        from{
+            transform: translateX(-12%);
+        }
+
+        to{
+            transform: translateX(-100%);
+        }
+    }
+
+    #porteGauche{
+        background-size: 28%;
+        transform: translate(-12%, -2%);
+        animation: translation-porte-gauche-ordi 2s 1s ease-out forwards;
+    }
+
+    /*animation pour la porte de droite qui se déplace vers la droite sur l'ordinateur*/
+
+    @keyframes translation-porte-droite-ordi {
+        from{
+            transform: translateX(14%);
+        }
+
+        to{
+            transform: translateX(100%);
+        }
+    }
+
+    #porteDroite{
+        background-size: 28%;
+        transform: translate(14%, -2%);
+        animation: translation-porte-droite-ordi 2s 1s ease-out forwards;
+    }
+
+    /*section ou les reponses se trouve*/
+    .conteneurReponse{
+        flex-direction: row;
+        flex-wrap: nowrap;
+        width: 90vw;
+        height: 30vh;
+        margin-top: 2%;
+    } 
+
+    .boiteChoix{
+        height: 10vh;
+    }
+
+    .skieur{
+        left: 85vw;
+    }
+
+    #boutonJouer::before{
+        transform: translateY(200%);
+    }
+
+    .curseur{
+        background-image: url(../Images/1x/bouleNeige.png);
+        background-repeat: no-repeat;
+        background-size: 80%;
+        top: -1.2rem;
+        left: -1.2rem;
+        position: fixed;
+        width: 2.4rem;
+        height: 2.4rem;
+        transform: translate(var(--position-x), var(--position-y));
+        z-index: 10000000;
+        pointer-events: none;
+        will-change: transform;
+        transition: transform 0.5s ease-out;
+    }
+}
