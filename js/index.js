@@ -4,6 +4,8 @@
 //declaration des variables
     //bouton jouer
     let boutonJouer = document.querySelector("#boutonJouer");
+    //bouton rejouer
+    let boutonRejouer;
     //section ou les questions et reponses seront afficher
     let sectionQuiz = document.querySelector("#quiz");
     //section pour mettre les questions et la pente de ski dedans
@@ -170,6 +172,11 @@ function premiereQuestion(event){
     //rajouter l'animation d'ouverture pour la question
     sectionAnimer.style.display = "block";
     sectionAnimer.style.animation = "animation-ouverture-section-0 2s ease-in forwards"
+
+    //enelver les écouteurs d'événements
+    boutonJouer.removeEventListener("click", premiereQuestion);
+    boutonRejouer.removeEventListener("click", rejouer);
+
 }
 
 
@@ -239,6 +246,7 @@ function question2(){
     //rajouter l'animation d'ouverture pour la question
     sectionAnimer.style.display = "block";
     sectionAnimer.style.animation = "animation-ouverture-section-1 2s ease-in forwards"
+
 }
 
 //question 3 est une video de quelqu'un qui réalise un screaming seamen 360
@@ -473,7 +481,7 @@ function fin(){
     sectionScore.append(textMeilleurScore);
 
     //bouton rejouer
-    let boutonRejouer = document.createElement("div");
+    boutonRejouer = document.createElement("div");
     boutonRejouer.innerHTML = `<span class="material-icons rejouer">replay</span>`;
     boutonRejouer.addEventListener("click", rejouer);
     sectionScore.append(boutonRejouer);  
@@ -516,6 +524,8 @@ function rejouer(){
     //remettre a 0 des varibles pour recommencer
     noQuestion = 0
     score = 0;
+    minutes = 0;
+    secondes = 0;
     if(window.matchMedia("(min-width:1080px)").matches){
         positionSkieurY = 17;
     //tablette 
